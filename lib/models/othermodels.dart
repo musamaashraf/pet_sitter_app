@@ -1,0 +1,1 @@
+enum ShowJobDetails { isComplete, isOpened }

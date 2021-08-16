@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:whiskers_away/database/databasemethods.dart';
 import 'package:whiskers_away/routes/routenames.dart';
 import 'package:whiskers_away/style/colors.dart';
 
@@ -17,6 +19,24 @@ class _LoginPageState extends State<LoginPage> {
       TextEditingController();
   bool showPassword = false;
   final _formKey = GlobalKey<FormState>();
+  final DatabaseMethods _databaseMethods = DatabaseMethods();
+
+  void login() async {
+    if (_formKey.currentState!.validate()) {
+      await _databaseMethods
+          .signInWithEmailAndPassword(
+              email: _emailEditingController.text.trim(),
+              password: _passwordEditingController.text.trim())
+          .then((value) {
+        User? user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          if (user.uid.isNotEmpty) {
+            Navigator.pushNamed(context, homePetSitterRoute);
+          }
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, homePetSitterRoute);
+                      login();
                     },
                     child: Container(
                       decoration: BoxDecoration(

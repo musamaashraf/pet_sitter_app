@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:whiskers_away/choice.dart';
+import 'package:whiskers_away/client/clientbooking.dart';
+import 'package:whiskers_away/client/clienthome.dart';
+import 'package:whiskers_away/client/petsitterdetails.dart';
+import 'package:whiskers_away/client/petsitterexpdetails.dart';
+import 'package:whiskers_away/client/submitrequest.dart';
 import 'package:whiskers_away/login.dart';
 import 'package:whiskers_away/models/jobdetailmodel.dart';
+import 'package:whiskers_away/models/petsitter.dart';
 import 'package:whiskers_away/onboarding.dart';
 import 'package:whiskers_away/petsitter/homeps.dart';
 import 'package:whiskers_away/petsitter/jobdetailps.dart';
@@ -32,6 +38,11 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => HomePetSitterPage(),
         );
+      case clientHomeRoute:
+        return MaterialPageRoute(
+          builder: (_) => ClientHomePage(),
+        );
+
       case jobDetailsPetSitterRoute:
         if (args is JobDetails) {
           return MaterialPageRoute(
@@ -41,6 +52,27 @@ class RouteGenerator {
           );
         }
         return _errorRoute();
+      case submitequestRoute:
+        return MaterialPageRoute(
+          builder: (_) => SubmitRequestPage(),
+        );
+      case clientBookingRoute:
+        return MaterialPageRoute(
+          builder: (_) => ClientBookingPage(),
+        );
+      case petSitterDetailsRoute:
+        if (args is PetSitter) {
+          return MaterialPageRoute(
+            builder: (_) => PetSitterDetailsPage(
+              petSitter: args,
+            ),
+          );
+        }
+        return _errorRoute();
+      case petSitterExpDetailsRoute:
+        return MaterialPageRoute(
+          builder: (_) => PetSitterExperienceDetails(),
+        );
 
       // case '/list':
       //   if (args is String) {

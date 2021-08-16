@@ -56,6 +56,9 @@ class _FirstChoicePageState extends State<FirstChoicePage> {
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.020),
               GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, onBoardingRoute);
+                },
                 child: Container(
                   decoration: BoxDecoration(
                     color: Palette.primary,
@@ -122,7 +125,7 @@ class _FirstChoicePageState extends State<FirstChoicePage> {
               SizedBox(height: MediaQuery.of(context).size.height * 0.020),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, onBoardingRoute);
+                  Navigator.pushNamed(context, clientHomeRoute);
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -152,7 +155,7 @@ class _FirstChoicePageState extends State<FirstChoicePage> {
                             ),
                           ),
                           Text(
-                            ' a pet sitter',
+                            ' a pet owner',
                             style: TextStyle(
                               color: Palette.primary,
                               fontWeight: FontWeight.w100,
